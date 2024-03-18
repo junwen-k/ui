@@ -53,6 +53,7 @@ export default function ComboboxInput() {
               asChild
               value={search}
               onValueChange={setSearch}
+              onKeyDown={() => setOpen(true)}
               onFocus={() => setOpen(true)}
               onBlur={() => {
                 if (value) {
@@ -70,9 +71,7 @@ export default function ComboboxInput() {
           <PopoverContent
             asChild
             onOpenAutoFocus={(e) => e.preventDefault()}
-            onCloseAutoFocus={(e) => e.preventDefault()}
-            sideOffset={0}
-            className="w-[200px] p-0"
+            className="w-[--radix-popover-trigger-width] p-0"
           >
             <CommandList>
               <CommandEmpty>No framework found.</CommandEmpty>
@@ -81,7 +80,9 @@ export default function ComboboxInput() {
                   <CommandItem
                     key={framework.value}
                     value={framework.value}
+                    onMouseDown={(e) => e.preventDefault()}
                     onSelect={(currentValue) => {
+                      console.log(currentValue)
                       setValue(currentValue === value ? "" : currentValue)
                       setSearch(
                         currentValue === value
@@ -90,6 +91,7 @@ export default function ComboboxInput() {
                               (framework) => framework.value === currentValue
                             )?.label ?? ""
                       )
+                      setOpen(false)
                     }}
                   >
                     <Check
