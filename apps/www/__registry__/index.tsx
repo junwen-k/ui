@@ -621,6 +621,13 @@ export const Index: Record<string, any> = {
       component: React.lazy(() => import("@/registry/default/example/combobox-demo")),
       files: ["registry/default/example/combobox-demo.tsx"],
     },
+    "combobox-input": {
+      name: "combobox-input",
+      type: "components:example",
+      registryDependencies: ["command","popover","input"],
+      component: React.lazy(() => import("@/registry/default/example/combobox-input")),
+      files: ["registry/default/example/combobox-input.tsx"],
+    },
     "combobox-dropdown-menu": {
       name: "combobox-dropdown-menu",
       type: "components:example",
@@ -1937,6 +1944,13 @@ export const Index: Record<string, any> = {
       registryDependencies: ["command"],
       component: React.lazy(() => import("@/registry/new-york/example/combobox-demo")),
       files: ["registry/new-york/example/combobox-demo.tsx"],
+    },
+    "combobox-input": {
+      name: "combobox-input",
+      type: "components:example",
+      registryDependencies: ["command","popover","input"],
+      component: React.lazy(() => import("@/registry/new-york/example/combobox-input")),
+      files: ["registry/new-york/example/combobox-input.tsx"],
     },
     "combobox-dropdown-menu": {
       name: "combobox-dropdown-menu",

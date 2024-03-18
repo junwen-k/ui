@@ -538,6 +538,12 @@ const example: Registry = [
     files: ["example/combobox-demo.tsx"],
   },
   {
+    name: "combobox-input",
+    type: "components:example",
+    registryDependencies: ["command", "popover", "input"],
+    files: ["example/combobox-input.tsx"],
+  },
+  {
     name: "combobox-dropdown-menu",
     type: "components:example",
     registryDependencies: ["command", "dropdown-menu", "button"],
