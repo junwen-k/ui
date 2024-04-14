@@ -78,6 +78,7 @@ export default function ComboboxInput() {
           {!open && <CommandList aria-hidden="true" className="hidden" />}
           <PopoverContent
             asChild
+            onOpenAutoFocus={(e) => e.preventDefault()}
             onInteractOutside={(e) => {
               if (
                 e.target instanceof Element &&
