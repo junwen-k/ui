@@ -53,11 +53,7 @@ export default function ComboboxInput() {
               asChild
               value={search}
               onValueChange={setSearch}
-              onKeyDown={(e) => {
-                if (e.key !== "Escape") {
-                  setOpen(true)
-                }
-              }}
+              onKeyDown={(e) => setOpen(e.key !== "Escape")}
               onMouseDown={() => setOpen((open) => !!search || !open)}
               onFocus={() => setOpen(true)}
               onBlur={(e) => {
