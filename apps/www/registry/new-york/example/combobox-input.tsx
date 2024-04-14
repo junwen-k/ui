@@ -53,24 +53,39 @@ export default function ComboboxInput() {
               asChild
               value={search}
               onValueChange={setSearch}
-              onKeyDown={() => setOpen(true)}
+              onKeyDown={(e) => {
+                if (e.key !== "Escape") {
+                  setOpen(true)
+                }
+              }}
+              onMouseDown={() => setOpen((open) => !!search || !open)}
               onFocus={() => setOpen(true)}
-              onBlur={() => {
-                if (value) {
+              onBlur={(e) => {
+                if (!e.relatedTarget?.hasAttribute("cmdk-list")) {
                   setSearch(
-                    frameworks.find((framework) => framework.value === value)
-                      ?.label ?? ""
+                    value
+                      ? frameworks.find(
+                          (framework) => framework.value === value
+                        )?.label ?? ""
+                      : ""
                   )
                 }
-                setOpen(false)
               }}
             >
               <Input placeholder="Select framework..." className="w-[200px]" />
             </CommandPrimitive.Input>
           </PopoverPrimitive.Anchor>
+          {!open && <CommandList aria-hidden="true" className="hidden" />}
           <PopoverContent
             asChild
-            onOpenAutoFocus={(e) => e.preventDefault()}
+            onInteractOutside={(e) => {
+              if (
+                e.target instanceof Element &&
+                e.target.hasAttribute("cmdk-input")
+              ) {
+                e.preventDefault()
+              }
+            }}
             className="w-[--radix-popover-trigger-width] p-0"
           >
             <CommandList>
@@ -82,7 +97,6 @@ export default function ComboboxInput() {
                     value={framework.value}
                     onMouseDown={(e) => e.preventDefault()}
                     onSelect={(currentValue) => {
-                      console.log(currentValue)
                       setValue(currentValue === value ? "" : currentValue)
                       setSearch(
                         currentValue === value
